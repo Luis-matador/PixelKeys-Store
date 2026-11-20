@@ -1,6 +1,6 @@
-# G2A Kotlin Store
+# PixelKeys Store
 
-Aplicación Android en Kotlin que simula un ecommerce digital estilo **G2A / marketplace gaming**, orientado a la venta de:
+Aplicación Android en Kotlin que simula un ecommerce digital tipo **marketplace gaming de claves digitales**, orientado a la venta de:
 
 - juegos digitales
 - keys
@@ -136,7 +136,7 @@ La app usa **Room sobre SQLite**.
 
 La base se crea localmente como:
 
-- `g2a_store_room.db`
+- `pixelkeys_store_room.db`
 
 ### Persistencia actual
 
@@ -158,11 +158,11 @@ Sí. La base de datos se **puebla automáticamente en el primer arranque** con d
 #### Usuarios demo cargados
 
 - Usuario:
-  - email: `buyer@g2a.local`
+  - email: `buyer@pixelkeys.local`
   - contraseña: `1234`
 
 - Administrador:
-  - email: `admin@g2a.local`
+  - email: `admin@pixelkeys.local`
   - contraseña: `admin123`
 
 #### Productos demo cargados
@@ -195,7 +195,7 @@ Campos principales:
 - `id`
 - `name`
 - `email`
-- `password`
+- `password` (hash PBKDF2 con sal aleatoria, nunca en texto plano; ver `util/PasswordHasher.kt`)
 - `role`
 - `photo_uri`
 
@@ -514,11 +514,11 @@ $env:ANDROID_HOME = "C:\Users\angel\AppData\Local\Android\Sdk"
 ## 12. Cuentas demo
 
 ### Usuario normal
-- email: `buyer@g2a.local`
+- email: `buyer@pixelkeys.local`
 - contraseña: `1234`
 
 ### Administrador
-- email: `admin@g2a.local`
+- email: `admin@pixelkeys.local`
 - contraseña: `admin123`
 
 ---
