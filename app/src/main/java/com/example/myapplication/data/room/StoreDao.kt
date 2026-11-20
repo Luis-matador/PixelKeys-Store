@@ -10,9 +10,6 @@ import androidx.room.Update
 @Dao
 interface StoreDao {
 
-    @Query("SELECT * FROM users WHERE LOWER(email) = LOWER(:email) AND password = :password LIMIT 1")
-    fun login(email: String, password: String): UserEntity?
-
     @Query("SELECT * FROM users WHERE LOWER(email) = LOWER(:email) LIMIT 1")
     fun findUserByEmail(email: String): UserEntity?
 

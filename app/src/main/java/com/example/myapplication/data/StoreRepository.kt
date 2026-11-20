@@ -20,6 +20,7 @@ import com.example.myapplication.model.OrderWithItems
 import com.example.myapplication.model.Product
 import com.example.myapplication.model.StoreSortOption
 import com.example.myapplication.model.User
+import com.example.myapplication.util.PasswordHasher
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -42,8 +43,10 @@ class StoreRepository private constructor(context: Context) {
 
     private val dao = db.storeDao()
 
-    fun login(email: String, password: String): User? =
-        dao.login(email.trim().lowercase(), password)?.toModel()
+    fun login(email: String, password: String): User? {
+        val usuario = dao.findUserByEmail(email.trim().lowercase()) ?: return null
+        return if (PasswordHasher.verify(password, usuario.password)) usuario.toModel() else null
+    }
 
     fun registerUser(name: String, email: String, password: String): AuthResult {
         if (name.isBlank() || email.isBlank() || password.isBlank()) {
@@ -62,7 +65,7 @@ class StoreRepository private constructor(context: Context) {
             UserEntity(
                 name = name.trim(),
                 email = email.trim().lowercase(),
-                password = password,
+                password = PasswordHasher.hash(password),
                 role = "user",
             ),
         ).toInt()
@@ -319,10 +322,10 @@ class StoreRepository private constructor(context: Context) {
     }
 
     private fun seed(db: SupportSQLiteDatabase) {
-        db.execSQL("INSERT INTO users(name, email, password, role) VALUES ('Demo Buyer', 'buyer@g2a.local', '1234', 'user')")
-        db.execSQL("INSERT INTO users(name, email, password, role) VALUES ('Admin Store', 'admin@g2a.local', 'admin123', 'admin')")
+        db.execSQL("INSERT INTO users(name, email, password, role) VALUES ('Demo Buyer', 'buyer@pixelkeys.local', '${PasswordHasher.hash("1234")}', 'user')")
+        db.execSQL("INSERT INTO users(name, email, password, role) VALUES ('Admin Store', 'admin@pixelkeys.local', '${PasswordHasher.hash("admin123")}', 'admin')")
         db.execSQL("INSERT INTO products(title, platform, category, description, price, stock, image_uri, featured) VALUES ('Elden Ring Nightreign Key', 'PC / Steam', 'Juegos', 'Clave digital inmediata para Steam. Incluye bonus de lanzamiento y entrega automática tras el pago.', 49.99, 12, NULL, 1)")
-        db.execSQL("INSERT INTO products(title, platform, category, description, price, stock, image_uri, featured) VALUES ('Cyberpunk 2077 Ultimate Edition', 'PC / GOG', 'Juegos', 'Edición completa con expansión Phantom Liberty. Ideal para catálogo premium tipo G2A.', 34.90, 8, NULL, 1)")
+        db.execSQL("INSERT INTO products(title, platform, category, description, price, stock, image_uri, featured) VALUES ('Cyberpunk 2077 Ultimate Edition', 'PC / GOG', 'Juegos', 'Edición completa con expansión Phantom Liberty. Ideal para un catálogo premium.', 34.90, 8, NULL, 1)")
         db.execSQL("INSERT INTO products(title, platform, category, description, price, stock, image_uri, featured) VALUES ('Minecraft Java & Bedrock', 'PC / Microsoft', 'Keys', 'Licencia oficial para jugar en Java y Bedrock. Entrega instantánea con clave segura.', 19.99, 22, NULL, 1)")
         db.execSQL("INSERT INTO products(title, platform, category, description, price, stock, image_uri, featured) VALUES ('PlayStation Store 50€', 'PlayStation', 'Gift Cards', 'Código digital para recargar tu wallet de PlayStation Store con entrega al instante.', 46.50, 15, NULL, 0)")
         db.execSQL("INSERT INTO products(title, platform, category, description, price, stock, image_uri, featured) VALUES ('EA Sports FC 26', 'Xbox Series', 'Juegos', 'Versión Xbox Series con acceso estándar y activación mediante código digital.', 54.00, 6, NULL, 0)")
@@ -331,7 +334,7 @@ class StoreRepository private constructor(context: Context) {
     }
 
     companion object {
-        private const val DATABASE_NAME = "g2a_store_room.db"
+        private const val DATABASE_NAME = "pixelkeys_store_room.db"
         const val ALL_CATEGORIES = "Todas"
         private const val ADMIN_USER_ID = 2
 

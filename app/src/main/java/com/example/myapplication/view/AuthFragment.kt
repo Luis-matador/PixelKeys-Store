@@ -49,7 +49,7 @@ class AuthFragment : Fragment() {
         }
 
         binding.btnQuickAdmin.setOnClickListener {
-            binding.etAuthEmail.setText("admin@g2a.local")
+            binding.etAuthEmail.setText("admin@pixelkeys.local")
             binding.etAuthPassword.setText("admin123")
         }
     }

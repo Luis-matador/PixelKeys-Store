@@ -35,7 +35,7 @@ class CheckoutFragment : Fragment() {
         binding.etBuyerEmail.setText(currentUser.email)
         binding.etBuyerName.setText(currentUser.name)
 
-        val methods = listOf("Tarjeta", "PayPal", "Bizum", "Saldo G2A")
+        val methods = listOf("Tarjeta", "PayPal", "Bizum", "Saldo PixelKeys")
         binding.spinnerPaymentMethod.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, methods)
 
         binding.btnConfirmPurchase.setOnClickListener {
