@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">G2A Kotlin Store</string>
+    <string name="app_name">PixelKeys Store</string>
     <string name="menu_catalog">Catálogo</string>
     <string name="menu_favorites">Favoritos</string>
     <string name="menu_cart">Carrito</string>
@@ -13,7 +13,7 @@
     <string name="catalog_title">Marketplace gaming instantáneo</string>
     <string name="catalog_subtitle">Claves, juegos, gift cards y suscripciones con entrega inmediata.</string>
     <string name="catalog_header_admin">Modo admin activo: crea productos, cambia imágenes y ajusta stock en tiempo real.</string>
-    <string name="catalog_header_user">Busca ofertas, filtra por categoría y guarda favoritos como en un marketplace tipo G2A.</string>
+    <string name="catalog_header_user">Busca ofertas, filtra por categoría y guarda favoritos como en un marketplace de claves digitales.</string>
     <string name="catalog_search_hint">Buscar juegos, plataformas o categorías</string>
     <string name="favorites_switch">Solo favoritos</string>
     <string name="sort_relevance">Ordenar: relevancia</string>
@@ -106,7 +106,7 @@
     <string name="register">Crear cuenta</string>
     <string name="quick_admin_fill">Rellenar credenciales admin</string>
     <string name="demo_credentials_title">Credenciales demo</string>
-    <string name="demo_credentials_body">Usuario: buyer@g2a.local / 1234&#10;Admin: admin@g2a.local / admin123</string>
+    <string name="demo_credentials_body">Usuario: buyer@pixelkeys.local / 1234&#10;Admin: admin@pixelkeys.local / admin123</string>
 
     <string name="product_image_desc">Imagen del producto</string>
     <string name="profile_image_desc">Imagen del perfil</string>
